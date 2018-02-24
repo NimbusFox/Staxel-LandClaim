@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NimbusFox.LandClaim", "NimbusFox.LandClaim\NimbusFox.LandClaim.csproj", "{7959CC4B-9400-4B14-ACCE-9E1527EBBBE8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NimbusFox.LandClaim.Interfaces", "NimbusFox.LandClaim.Interfaces\NimbusFox.LandClaim.Interfaces.csproj", "{929DA8AE-B4CA-4294-B66D-23656978EB1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NimbusFox.FoxCore", "Staxel-FoxCore\NimbusFox.FoxCore.csproj", "{8B473A82-8C34-44EA-B13D-39D0418E021F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{7959CC4B-9400-4B14-ACCE-9E1527EBBBE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7959CC4B-9400-4B14-ACCE-9E1527EBBBE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7959CC4B-9400-4B14-ACCE-9E1527EBBBE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{929DA8AE-B4CA-4294-B66D-23656978EB1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{929DA8AE-B4CA-4294-B66D-23656978EB1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{929DA8AE-B4CA-4294-B66D-23656978EB1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{929DA8AE-B4CA-4294-B66D-23656978EB1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B473A82-8C34-44EA-B13D-39D0418E021F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B473A82-8C34-44EA-B13D-39D0418E021F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B473A82-8C34-44EA-B13D-39D0418E021F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B473A82-8C34-44EA-B13D-39D0418E021F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

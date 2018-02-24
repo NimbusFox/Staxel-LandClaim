@@ -1,0 +1,13 @@
+﻿language.code=en-GB
+language=English
+
+mods.nimbusfox.exception.message=<NimbusFox>:^c:FF0000;An error occured in {0-mod} and an error log has been stored in the save folder under Mods\\Nimbusfox\\{1-mod}\\Errors. Currently there are no ways of sending the errors to me. If you see me in Discord don't hesitate to send me the file there. No personal information is gathered. Only what is public and what is stored in memory that {2-mod} has access to is present in the error files
+
+mods.nimbusfox.landclaim.description=^c:F2E200;claim ^c:FFFFFF;Displays subcommands for Land Claim
+mods.nimbusfox.landclaim.command.claim.description=^c:F2E200;claim ^c:34EA80;| ^c:35EAE1;help ^c:34EA80;| ^c:35EAE1;pos1 ^c:34EA80;| ^c:35EAE1;pos2 ^c:34EA80;| ^c:35EAE1;confirm ^c:34EA80;| ^c:35EAE1;clear ^c:34EA80;| ^c:35EAE1;purge
+mods.nimbusfox.landclaim.command.help.description=^c:F2E200;claim ^c:35EAE1;help ^c:D13AC7;commandname ^c:FFFFFF;Displays the help message for a Land Claim command
+mods.nimbusfox.landclaim.command.pos1.description=^c:F2E200;claim ^c:35EAE1;pos1 ^c:FFFFFF;Marks the first position of your claim
+mods.nimbusfox.landclaim.command.pos2.description=^c:F2E200;claim ^c:35EAE1;pos2 ^c:FFFFFF;Marks the second position of your claim
+mods.nimbusfox.landclaim.command.confirm.description=^c:F2E200;claim ^c:35EAE1;confirm ^c:FFFFFF;Confirms your claim and makes it so other people can't place or destroy items
+mods.nimbusfox.landclaim.command.clear.description=^c:F2E200;claim ^c:35EAE1;clear; ^c:FFFFFF;Removes the markers you have placed down
+mods.nimbusfox.landclaim.command.purge.description=^c:F2E200;claim ^c:35EAE1;purge; ^c:FFFFFF;Releases your claim from the world

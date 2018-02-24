@@ -1,0 +1,3 @@
+[submodule "Staxel-FoxCore"]
+	path = Staxel-FoxCore
+	url = https://github.com/NimbusFox/Staxel-FoxCore.git

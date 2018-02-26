@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using NimbusFox.FoxCore.Classes;
 
 namespace NimbusFox.LandClaim.Classes {
+    [Serializable]
     public class ClaimAreaV1 {
         public string OwnerUid { get; set; }
         public string OwnerName { get; set; }

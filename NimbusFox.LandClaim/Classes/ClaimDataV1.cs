@@ -7,6 +7,7 @@ using NimbusFox.FoxCore.Classes;
 using Staxel.Logic;
 
 namespace NimbusFox.LandClaim.Classes {
+    [Serializable]
     public class ClaimDataV1 {
         public List<ClaimAreaV1> ClaimedAreas { get; set; }
 

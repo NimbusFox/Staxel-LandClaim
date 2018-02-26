@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NimbusFox.LandClaim.Interfaces</RootNamespace>
     <AssemblyName>NimbusFox.LandClaim.Interfaces</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,12 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
     <Reference Include="Plukit.Base">
-      <HintPath>..\..\..\Steam\steamapps\common\Staxel\bin\Plukit.Base.dll</HintPath>
+      <HintPath>..\..\..\..\Steam\steamapps\common\Staxel\bin\Plukit.Base.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Staxel">
-      <HintPath>..\..\..\Steam\steamapps\common\Staxel\bin\Staxel.dll</HintPath>
+      <HintPath>..\..\..\..\Steam\steamapps\common\Staxel\bin\Staxel.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -49,13 +51,6 @@
   <ItemGroup>
     <Compile Include="ILandClaim.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Staxel-FoxCore\NimbusFox.FoxCore.csproj">
-      <Project>{8b473a82-8c34-44ea-b13d-39d0418e021f}</Project>
-      <Name>NimbusFox.FoxCore</Name>
-      <Private>False</Private>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Classes\" />

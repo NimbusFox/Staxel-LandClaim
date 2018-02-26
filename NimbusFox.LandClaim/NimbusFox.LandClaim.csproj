@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NimbusFox.LandClaim</RootNamespace>
     <AssemblyName>NimbusFox.LandClaim</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,37 +31,35 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
-    <Reference Include="NimbusFox.FoxCore.V1-20180223">
-      <HintPath>..\..\..\Steam\steamapps\common\Staxel\bin\NimbusFox.FoxCore.V1-20180223.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <Private>False</Private>
     </Reference>
     <Reference Include="Plukit.Base">
-      <HintPath>..\..\..\Steam\steamapps\common\Staxel\bin\Plukit.Base.dll</HintPath>
+      <HintPath>..\..\..\..\Steam\steamapps\common\Staxel\bin\Plukit.Base.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Staxel">
-      <HintPath>..\..\..\Steam\steamapps\common\Staxel\bin\Staxel.dll</HintPath>
+      <HintPath>..\..\..\..\Steam\steamapps\common\Staxel\bin\Staxel.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Staxel.Auth">
-      <HintPath>..\..\..\Steam\steamapps\common\Staxel\bin\Staxel.Auth.dll</HintPath>
+      <HintPath>..\..\..\..\Steam\steamapps\common\Staxel\bin\Staxel.Auth.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Staxel.Checks">
-      <HintPath>..\..\..\Steam\steamapps\common\Staxel\bin\Staxel.Checks.dll</HintPath>
+      <HintPath>..\..\..\..\Steam\steamapps\common\Staxel\bin\Staxel.Checks.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Staxel.ToolUtilities">
-      <HintPath>..\..\..\Steam\steamapps\common\Staxel\bin\Staxel.ToolUtilities.dll</HintPath>
+      <HintPath>..\..\..\..\Steam\steamapps\common\Staxel\bin\Staxel.ToolUtilities.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Staxel.Trace">
-      <HintPath>..\..\..\Steam\steamapps\common\Staxel\bin\Staxel.Trace.dll</HintPath>
+      <HintPath>..\..\..\..\Steam\steamapps\common\Staxel\bin\Staxel.Trace.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Staxel.ValueSource">
-      <HintPath>..\..\..\Steam\steamapps\common\Staxel\bin\Staxel.ValueSource.dll</HintPath>
+      <HintPath>..\..\..\..\Steam\steamapps\common\Staxel\bin\Staxel.ValueSource.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -75,23 +74,43 @@
   <ItemGroup>
     <Compile Include="Classes\ClaimAreaV1.cs" />
     <Compile Include="Classes\ClaimDataV1.cs" />
+    <Compile Include="Classes\LandClaimSettings.cs" />
     <Compile Include="Classes\Positions.cs" />
     <Compile Include="Classes\TempData.cs" />
     <Compile Include="LandManager.cs" />
-    <Compile Include="LandManagerHook.cs" />
+    <Compile Include="LandClaimHook.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserCommands.cs" />
+    <Compile Include="LandClaimUserCommands.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="NimbusFox.LandClaim.mod" />
+    <Content Include="NimbusFox.LandClaim.mod">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="NimbusFox.LandClaim-En-GB.lang" />
+    <None Include="NimbusFox.LandClaim-En-GB.lang">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Staxel\Particles\LandClaim.particle">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Staxel\Particles\LandClaimed.particle">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Staxel\Particles\LandTaken.particle">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Staxel-FoxCore\NimbusFox.FoxCore.csproj">
+      <Project>{8b473a82-8c34-44ea-b13d-39d0418e021f}</Project>
+      <Name>NimbusFox.FoxCore</Name>
+      <Private>False</Private>
+    </ProjectReference>
     <ProjectReference Include="..\NimbusFox.LandClaim.Interfaces\NimbusFox.LandClaim.Interfaces.csproj">
       <Project>{929DA8AE-B4CA-4294-B66D-23656978EB1D}</Project>
       <Name>NimbusFox.LandClaim.Interfaces</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

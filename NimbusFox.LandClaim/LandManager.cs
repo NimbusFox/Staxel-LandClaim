@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using NimbusFox.FoxCore;
 using NimbusFox.FoxCore.Classes;
 using NimbusFox.LandClaim.Classes;
+using NimbusFox.LandClaim.Enums;
 using NimbusFox.LandClaim.Interfaces;
 using Plukit.Base;
 using Staxel;
@@ -120,7 +121,7 @@ namespace NimbusFox.LandClaim {
             }
         }
 
-        internal static string _Confirm(Entity entity) {
+        internal static string _Confirm(Entity entity, bool admin = false) {
             CheckPlayerMarkers(entity);
 
             var target = TempData.ClaimMarkers[entity];
@@ -133,14 +134,15 @@ namespace NimbusFox.LandClaim {
                 return "mods.nimbusfox.landclaim.error.landtaken";
             }
 
-            if (_HasClaim(entity.PlayerEntityLogic.Uid())) {
+            if (_HasClaim(entity.PlayerEntityLogic.Uid()) && !admin) {
                 return "mods.nimbusfox.landclaim.error.hasclaim";
             }
 
             var newArea = new ClaimAreaV1 {
                 OwnerUid = entity.PlayerEntityLogic.Uid(),
                 OwnerName = entity.PlayerEntityLogic.DisplayName(),
-                Area = new VectorSquareI(Converters.From3Dto3I(target.Start), Converters.From3Dto3I(target.End))
+                Area = new VectorSquareI(Converters.From3Dto3I(target.Start), Converters.From3Dto3I(target.End)),
+                IsAdminArea = admin
             };
 
             ClaimData.ClaimedAreas.Add(newArea);
@@ -194,6 +196,7 @@ namespace NimbusFox.LandClaim {
             if (area != null) {
                 if (!area.Guests.Contains(guestUid)) {
                     area.Guests.Add(guestUid);
+                    Flush();
                 }
             }
         }
@@ -203,6 +206,7 @@ namespace NimbusFox.LandClaim {
             if (area != null) {
                 if (area.Guests.Contains(guestUid)) {
                     area.Guests.Remove(guestUid);
+                    Flush();
                 }
             }
         }
@@ -213,6 +217,56 @@ namespace NimbusFox.LandClaim {
 
         public void RemoveGuest(string ownerUid, string guestUid) {
             _RemoveGuest(ownerUid, guestUid);
+        }
+
+        internal static bool _Remove(ClaimAreaV1 area) {
+            if (ClaimData.CloneClaimedAreas().Contains(area)) {
+                ClaimData.ClaimedAreas.Remove(area);
+                Flush();
+                return true;
+            }
+            return false;
+        }
+
+        internal static int _ShowRange(Vector3I start, int distance) {
+            var regions = new List<ClaimAreaV1>();
+
+            var collection = ClaimData.CloneClaimedAreas();
+
+            for (var x = start.X - distance; x <= start.X + distance; x++) {
+                for (var z = start.Z - distance; z <= start.Z + distance; z++) {
+                    var current = collection.Where(v => v.Area.IsInside(new Vector3I(x, start.Y, z)));
+                    foreach (var region in current) {
+                        if (!regions.Contains(region)) {
+                            regions.Add(region);
+                        }
+                    }
+                }
+            }
+
+            foreach (var region in regions) {
+                Expires.Add(FoxCore.ParticleManager.Add(new Vector3D(region.Area.X.Start, start.Y, region.Area.Z.Start), new Vector3D(region.Area.X.End, start.Y + 10, region.Area.Z.End), "mods.nimbusfox.landclaim.particles.claimed"), DateTime.Now.AddSeconds(5));
+            }
+
+            return regions.Count;
+        }
+
+        internal static AdminState _ToggleAdmin(Entity entity) {
+            if (!_IsInArea(entity)) {
+                return AdminState.Fail;
+            }
+
+            var area = GetArea(entity);
+
+            if (area.IsAdminArea) {
+                area.IsAdminArea = false;
+                Flush();
+                return AdminState.User;
+            }
+
+            area.IsAdminArea = true;
+            Flush();
+            return AdminState.Admin;
         }
     }
 }

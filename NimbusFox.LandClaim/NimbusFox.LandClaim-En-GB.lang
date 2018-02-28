@@ -12,12 +12,31 @@ mods.nimbusfox.landclaim.command.confirm.description=^c:F2E200;claim ^c:35EAE1;c
 mods.nimbusfox.landclaim.command.clear.description=^c:F2E200;claim ^c:35EAE1;clear; ^c:FFFFFF;Removes the markers you have placed down
 mods.nimbusfox.landclaim.command.purge.description=^c:F2E200;claim ^c:35EAE1;purge; ^c:FFFFFF;Releases your claim from the world
 
+mods.nimbusfox.landclaim.admin.description=^c:F2E200;lcadmin ^c:FFFFFF;Displays the admin subcommands for Land Claim
+mods.nimbusfox.landclaim.admin.command.lcadmin.description=^c:F2E200;lcadmin ^c:34EA80;| ^c:35EAE1;help ^c:34EA80;| ^c:35EAE1;releaseclaim ^c:34EA80;| ^c:35EAE1;adminclaim ^c:34EA80;| ^c:35EAE1;showclaims ^c:34EA80;| ^c:35EAE1;toggleadmin ^c:34EA80;| ^c:35EAE1;details
+mods.nimbusfox.landclaim.admin.command.help.description=^c:F2E200;lcadmin ^c:35EAE1;help ^c:D13AC7;commandname ^c:FFFFFF;Displays the help message for a Land Claim Admin command
+mods.nimbusfox.landclaim.admin.command.releaseclaim.description=^c:F2E200;lcadmin ^c:35EAE1;releaseclaim ^c:FFFFFF;Release the claim in which you are standing in
+mods.nimbusfox.landclaim.admin.command.adminclaim.description=^c:F2E200;lcadmin ^c:35EAE1;adminclaim ^c:FFFFFF;Makes the set down markers as an admin claim
+mods.nimbusfox.landclaim.admin.command.showclaims.description=^c:F2E200;lcadmin ^c:35EAE1;showclaims ^c:D13AC7;Distance<10> ^c:FFFFFF;Shows the claims in the range specified
+mods.nimbusfox.landclaim.admin.command.toggleadmin.description=^c:F2E200;lcadmin ^c:35EAE1;toggleadmin ^c:FFFFFF;Toggles the claim you are in between an admin zone and a user zone
+mods.nimbusfox.landclaim.admin.command.details.description=^c:F2E200;lcadmin ^c:35EAE1;details ^c:FFFFFF;Displays information regarding the zone you are standing in
+
 mods.nimbusfox.landclaim.success.pos1=^c:34EA80;Position 1 set successfully
 mods.nimbusfox.landclaim.success.pos2=^c:34EA80;Position 2 set successfully
 mods.nimbusfox.landclaim.success.claim=^c:34EA80;You have successfully claimed this area
 mods.nimbusfox.landclaim.success.clear=^c:34EA80;Markers cleared
 mods.nimbusfox.landclaim.success.purge=^c:34EA80;Your claim has been cleared
+mods.nimbusfox.landclaim.success.releaseclaim=^c:34EA80;The claim has been released
+mods.nimbusfox.landclaim.success.showclaims=^c:34EA80;Showing {0-claims} claims
+mods.nimbusfox.landclaim.success.toggleadmin.user=^c:34EA80;This land is now under your protection
+mods.nimbusfox.landclaim.success.toggleadmin.admin=^c:34EA80;This land is now under admin protection
 
 mods.nimbusfox.landclaim.error.landtaken=^c:FF0000;You cannot put a claim inside someone else's land
 mods.nimbusfox.landclaim.error.hasclaim=^c:FF0000;You already have a piece of land claimed. Please use the purge command before claiming another piece of land
 mods.nimbusfox.landclaim.error.nopos=^c:FF0000;Be sure to have placed down both of your markers before placing a claim
+mods.nimbusfox.landclaim.error.notinclaim=^c:FF0000;You are not currently in a claimed zone
+
+mods.nimbusfox.landclaim.message.details.1=^c:F2E200;Owner:^c:FFFFFF;{0-player}
+mods.nimbusfox.landclaim.message.details.2=^c:F2E200;Size:^c:FFFFFF;{0-tilecount} tiles
+mods.nimbusfox.landclaim.message.details.3.adminzone=^c:F2E200;Type:^c:FFFFFF;Admin
+mods.nimbusfox.landclaim.message.details.3.userzone=^c:F2E200;Type:^c:FFFFFF;User

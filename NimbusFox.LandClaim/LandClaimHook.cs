@@ -58,7 +58,7 @@ namespace NimbusFox.LandClaim {
                     }
 
                     foreach (var area in LandManager.ClaimData.CloneClaimedAreas()) {
-                        if (area.Area.IsInside(location)) {
+                        if (area.Area.IsInside(location) && !area.IsAdminArea) {
                             if (area.OwnerUid != entity.PlayerEntityLogic.Uid()) {
                                 if (!new List<string>(area.Guests).Any(x => x == entity.PlayerEntityLogic.Uid())) {
                                     return false;

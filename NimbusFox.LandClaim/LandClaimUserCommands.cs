@@ -26,10 +26,14 @@ namespace NimbusFox.LandClaim {
                             return Confirm(bits, blob, connection, api, out responseParams);
                         case "clear":
                             return Clear(bits, blob, connection, api, out responseParams);
+                        case "purge":
+                            return Purge(bits, blob, connection, api, out responseParams);
                     }
                 }
             } catch (Exception ex) {
-                LandManager.FoxCore.ExceptionManager.HandleException(ex, new Dictionary<string, object>() {{"input", bits}});
+                LandManager.FoxCore.ExceptionManager.HandleException(ex,
+                    new Dictionary<string, object>
+                        {{"input", bits}, {"LC.db", LandManager.ClaimData}, {"LC.config", LandManager.Settings}});
                 responseParams = new object[3];
                 responseParams[0] = "LandClaim";
                 responseParams[1] = "LandClaim";

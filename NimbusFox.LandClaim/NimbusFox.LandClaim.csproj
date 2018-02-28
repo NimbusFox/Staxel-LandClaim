@@ -77,6 +77,8 @@
     <Compile Include="Classes\LandClaimSettings.cs" />
     <Compile Include="Classes\Positions.cs" />
     <Compile Include="Classes\TempData.cs" />
+    <Compile Include="Enums\AdminState.cs" />
+    <Compile Include="LandClaimAdminCommands.cs" />
     <Compile Include="LandManager.cs" />
     <Compile Include="LandClaimHook.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -102,7 +104,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Staxel-FoxCore\NimbusFox.FoxCore.csproj">
+    <ProjectReference Include="..\..\Staxel-FoxCore\NimbusFox.FoxCore\NimbusFox.FoxCore.csproj">
       <Project>{8b473a82-8c34-44ea-b13d-39d0418e021f}</Project>
       <Name>NimbusFox.FoxCore</Name>
       <Private>False</Private>

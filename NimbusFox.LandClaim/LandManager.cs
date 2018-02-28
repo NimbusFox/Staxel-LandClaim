@@ -47,7 +47,7 @@ namespace NimbusFox.LandClaim {
             }
         }
 
-        private static void Flush() {
+        internal static void Flush() {
             FoxCore.FileManager.WriteFile(ClaimFile, ClaimData);
             FoxCore.FileManager.WriteFile(SettingsFile, Settings, true);
         }
@@ -66,7 +66,9 @@ namespace NimbusFox.LandClaim {
             TempData.ClaimMarkers[entity].Start = position;
 
             if (!IsInsideClaim(TempData.ClaimMarkers[entity])) {
-                _CreateClaimRegion(entity);
+                if (_CreateClaimRegion(entity) && Settings.ChargeForClaiming) {
+                    return "mods.nimbusfox.landclaim.success.pos1.price";
+                }
                 return "mods.nimbusfox.landclaim.success.pos1";
             }
 
@@ -80,7 +82,9 @@ namespace NimbusFox.LandClaim {
             TempData.ClaimMarkers[entity].End = position;
 
             if (!IsInsideClaim(TempData.ClaimMarkers[entity])) {
-                _CreateClaimRegion(entity);
+                if (_CreateClaimRegion(entity) && Settings.ChargeForClaiming) {
+                    return "mods.nimbusfox.landclaim.success.pos2.price";
+                }
                 return "mods.nimbusfox.landclaim.success.pos2";
             }
 
@@ -92,7 +96,7 @@ namespace NimbusFox.LandClaim {
             var start = positions.Start == default(Vector3D) ? positions.End : positions.Start;
             var end = positions.End == default(Vector3D) ? positions.Start : positions.End;
 
-            var range = new VectorCubeI(Converters.From3Dto3I(start), Converters.From3Dto3I(end));
+            var range = new VectorCubeI(start.From3Dto3I(), end.From3Dto3I());
 
             for (var x = range.X.Start; x <= range.X.End; x++) {
                 for (var z = range.Z.Start; z <= range.Z.End; z++) {
@@ -110,7 +114,7 @@ namespace NimbusFox.LandClaim {
             return false;
         }
 
-        internal static void _CreateClaimRegion(Entity entity) {
+        internal static bool _CreateClaimRegion(Entity entity) {
             var data = TempData.ClaimMarkers[entity];
 
             if (data.Start != default(Vector3D) && data.End != default(Vector3D)) {
@@ -118,16 +122,32 @@ namespace NimbusFox.LandClaim {
                     FoxCore.ParticleManager.Remove(data.RegionGuid);
                 }
                 data.RegionGuid = FoxCore.ParticleManager.Add(data.Start, data.End, "mods.nimbusfox.landclaim.particles.region");
+                return true;
             }
+
+            return false;
         }
 
-        internal static string _Confirm(Entity entity, bool admin = false) {
+        internal static string _Confirm(Entity entity, out object[] responseParams, bool admin = false) {
+            responseParams = new object[] {};
             CheckPlayerMarkers(entity);
 
             var target = TempData.ClaimMarkers[entity];
 
             if (target.Start == default(Vector3D) || target.End == default(Vector3D)) {
                 return "mods.nimbusfox.landclaim.error.nopos";
+            }
+
+            var petalCostSquare = new VectorSquareI(target.Start.From3Dto3I(), target.End.From3Dto3I());
+
+            if (petalCostSquare.GetTileCount() * Settings.CostPerTile >
+                entity.PlayerEntityLogic.Inventory().GetMoney() && Settings.ChargeForClaiming) {
+                return "mods.nimbusfox.landlcaim.error.notenoughpetals";
+            }
+
+            if (petalCostSquare.GetTileCount() > Settings.MaxTiles && !admin) {
+                responseParams = new object[] {Settings.MaxTiles};
+                return "mods.nimbusfox.landclaim.error.toomanytiles";
             }
 
             if (IsInsideClaim(target)) {
@@ -141,7 +161,7 @@ namespace NimbusFox.LandClaim {
             var newArea = new ClaimAreaV1 {
                 OwnerUid = entity.PlayerEntityLogic.Uid(),
                 OwnerName = entity.PlayerEntityLogic.DisplayName(),
-                Area = new VectorSquareI(Converters.From3Dto3I(target.Start), Converters.From3Dto3I(target.End)),
+                Area = new VectorSquareI(target.Start.From3Dto3I(), target.End.From3Dto3I()),
                 IsAdminArea = admin
             };
 

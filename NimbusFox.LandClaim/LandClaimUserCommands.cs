@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NimbusFox.FoxCore;
 using NimbusFox.FoxCore.Classes;
 using Plukit.Base;
 using Staxel.Commands;
@@ -74,7 +75,17 @@ namespace NimbusFox.LandClaim {
 
             var player = LandManager.FoxCore.UserManager.GetPlayerEntityByUid(connection.Credentials.Uid);
 
-            return LandManager._AddPos1(player, player.Physics.BottomPosition());
+            var output = LandManager._AddPos1(player, player.Physics.BottomPosition());
+
+            if (output.Contains(".price")) {
+                var area = LandManager.TempData.CloneMarkers()[player];
+
+                var estimateArea = new VectorSquareI(area.Start.From3Dto3I(), area.End.From3Dto3I());
+
+                responseParams = new object[] {estimateArea.GetTileCount() * LandManager.Settings.CostPerTile};
+            }
+
+            return output;
         }
 
         private static string Pos2(string[] bits, Blob blob, ClientServerConnection connection, ICommandsApi api,
@@ -83,7 +94,17 @@ namespace NimbusFox.LandClaim {
 
             var player = LandManager.FoxCore.UserManager.GetPlayerEntityByUid(connection.Credentials.Uid);
 
-            return LandManager._AddPos2(player, player.Physics.BottomPosition());
+            var output = LandManager._AddPos2(player, player.Physics.BottomPosition());
+
+            if (output.Contains(".price")) {
+                var area = LandManager.TempData.CloneMarkers()[player];
+
+                var estimateArea = new VectorSquareI(area.Start.From3Dto3I(), area.End.From3Dto3I());
+
+                responseParams = new object[] { estimateArea.GetTileCount() * LandManager.Settings.CostPerTile };
+            }
+
+            return output;
         }
 
         private static string Confirm(string[] bits, Blob blob, ClientServerConnection connection, ICommandsApi api,
@@ -92,7 +113,7 @@ namespace NimbusFox.LandClaim {
 
             var player = LandManager.FoxCore.UserManager.GetPlayerEntityByUid(connection.Credentials.Uid);
 
-            return LandManager._Confirm(player);
+            return LandManager._Confirm(player, out responseParams);
         }
 
         private static string Clear(string[] bits, Blob blob, ClientServerConnection connection, ICommandsApi api,

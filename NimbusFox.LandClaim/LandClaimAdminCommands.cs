@@ -29,6 +29,8 @@ namespace NimbusFox.LandClaim {
                             return ToggleAdmin(bits.Skip(2).ToArray(), blob, connection, api, out responseParams);
                         case "details":
                             return Details(bits.Skip(2).ToArray(), blob, connection, api, out responseParams);
+                        case "settings":
+                            return Settings(bits.Skip(2).ToArray(), blob, connection, api, out responseParams);
                     }
                 }
             } catch (Exception ex) {
@@ -63,6 +65,8 @@ namespace NimbusFox.LandClaim {
                         return "mods.nimbusfox.landclaim.admin.command.toggleadmin.description";
                     case "details":
                         return "mods.nimbusfox.landclaim.admin.command.details.description";
+                    case "settings":
+                        return "mods.nimbusfox.landclaim.admin.command.settings.description";
                 }
             }
 
@@ -94,7 +98,7 @@ namespace NimbusFox.LandClaim {
 
             var player = LandManager.FoxCore.UserManager.GetPlayerEntityByUid(connection.Credentials.Uid);
 
-            return LandManager._Confirm(player, true);
+            return LandManager._Confirm(player, out _, true);
         }
 
         private static string ShowClaims(string[] bits, Blob blob, ClientServerConnection connection, ICommandsApi api,
@@ -157,6 +161,79 @@ namespace NimbusFox.LandClaim {
             }
 
             return "mods.nimbusfox.landclaim.error.notinclaim";
+        }
+
+        private static string Settings(string[] bits, Blob blob, ClientServerConnection connection, ICommandsApi api,
+            out object[] responseParams) {
+            responseParams = new object[] { };
+
+            var items = new Dictionary<int, string>();
+
+            var needflush = false;
+
+            if (bits.Any()) {
+                if (bits.Length >= 2) {
+                    int parseInt;
+                    bool parseBool;
+                    switch (bits[0].ToLower()) {
+                        case "maxtiles":
+                            if (int.TryParse(bits[1], out parseInt)) {
+                                LandManager.Settings.MaxTiles = parseInt;
+                                items.Add(3, "mods.nimbusfox.landclaim.message.settings.3.update");
+                                needflush = true;
+                                goto notinvalid;
+                            }
+
+                            break;
+                        case "costpertile":
+                            if (int.TryParse(bits[1], out parseInt)) {
+                                LandManager.Settings.CostPerTile = parseInt;
+                                items.Add(2, "mods.nimbusfox.landclaim.message.settings.2.update");
+                                needflush = true;
+                                goto notinvalid;
+                            }
+
+                            break;
+                        case "chargeforclaiming":
+                            if (bool.TryParse(bits[1], out parseBool)) {
+                                LandManager.Settings.ChargeForClaiming = parseBool;
+                                items.Add(1, "mods.nimbusfox.landclaim.message.settings.1.update");
+                                needflush = true;
+                                goto notinvalid;
+                            }
+
+                            break;
+                    }
+
+                    return "mods.nimbusfox.landclaim.error.invalidsetting";
+                }
+                return "mods.nimbusfox.landclaim.error.invalidsetting";
+            }
+            notinvalid:
+            if (!items.ContainsKey(1)) {
+                items.Add(1, "mods.nimbusfox.landclaim.message.settings.1");
+            }
+
+            if (!items.ContainsKey(2)) {
+                items.Add(2, "mods.nimbusfox.landclaim.message.settings.2");
+            }
+
+            if (!items.ContainsKey(3)) {
+                items.Add(3, "mods.nimbusfox.landclaim.message.settings.3");
+            }
+
+            if (needflush) {
+                LandManager.Flush();
+            }
+
+            api.MessagePlayer(connection.Credentials.Uid, items[1],
+                new object[] {LandManager.Settings.ChargeForClaiming.ToString()});
+
+            api.MessagePlayer(connection.Credentials.Uid, items[2], new object[] {LandManager.Settings.MaxTiles});
+
+            api.MessagePlayer(connection.Credentials.Uid, items[3], new object[] {LandManager.Settings.CostPerTile});
+
+            return "";
         }
     }
 }

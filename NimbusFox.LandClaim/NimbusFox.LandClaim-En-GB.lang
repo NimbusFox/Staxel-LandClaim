@@ -13,16 +13,19 @@ mods.nimbusfox.landclaim.command.clear.description=^c:F2E200;claim ^c:35EAE1;cle
 mods.nimbusfox.landclaim.command.purge.description=^c:F2E200;claim ^c:35EAE1;purge; ^c:FFFFFF;Releases your claim from the world
 
 mods.nimbusfox.landclaim.admin.description=^c:F2E200;lcadmin ^c:FFFFFF;Displays the admin subcommands for Land Claim
-mods.nimbusfox.landclaim.admin.command.lcadmin.description=^c:F2E200;lcadmin ^c:34EA80;| ^c:35EAE1;help ^c:34EA80;| ^c:35EAE1;releaseclaim ^c:34EA80;| ^c:35EAE1;adminclaim ^c:34EA80;| ^c:35EAE1;showclaims ^c:34EA80;| ^c:35EAE1;toggleadmin ^c:34EA80;| ^c:35EAE1;details
+mods.nimbusfox.landclaim.admin.command.lcadmin.description=^c:F2E200;lcadmin ^c:34EA80;| ^c:35EAE1;help ^c:34EA80;| ^c:35EAE1;releaseclaim ^c:34EA80;| ^c:35EAE1;adminclaim ^c:34EA80;| ^c:35EAE1;showclaims ^c:34EA80;| ^c:35EAE1;toggleadmin ^c:34EA80;| ^c:35EAE1;details ^c:34EA80;| ^c:35EAE1;settings
 mods.nimbusfox.landclaim.admin.command.help.description=^c:F2E200;lcadmin ^c:35EAE1;help ^c:D13AC7;commandname ^c:FFFFFF;Displays the help message for a Land Claim Admin command
 mods.nimbusfox.landclaim.admin.command.releaseclaim.description=^c:F2E200;lcadmin ^c:35EAE1;releaseclaim ^c:FFFFFF;Release the claim in which you are standing in
 mods.nimbusfox.landclaim.admin.command.adminclaim.description=^c:F2E200;lcadmin ^c:35EAE1;adminclaim ^c:FFFFFF;Makes the set down markers as an admin claim
 mods.nimbusfox.landclaim.admin.command.showclaims.description=^c:F2E200;lcadmin ^c:35EAE1;showclaims ^c:D13AC7;Distance<10> ^c:FFFFFF;Shows the claims in the range specified
 mods.nimbusfox.landclaim.admin.command.toggleadmin.description=^c:F2E200;lcadmin ^c:35EAE1;toggleadmin ^c:FFFFFF;Toggles the claim you are in between an admin zone and a user zone
 mods.nimbusfox.landclaim.admin.command.details.description=^c:F2E200;lcadmin ^c:35EAE1;details ^c:FFFFFF;Displays information regarding the zone you are standing in
+mods.nimbusfox.landclaim.admin.command.settings.description=^c:F2E200;lcadmin ^c:35EAE1;settings ^c:D13AC7;settingname settingvalue ^c:FFFFFF;Allows for viewing and setting values for Land Claim's settings
 
 mods.nimbusfox.landclaim.success.pos1=^c:34EA80;Position 1 set successfully
+mods.nimbusfox.landclaim.success.pos1.price=^c:34EA80;Position 1 set successfully. Price: ^c:FFFFFF;{0-petals} ^c:34EA80;Petals
 mods.nimbusfox.landclaim.success.pos2=^c:34EA80;Position 2 set successfully
+mods.nimbusfox.landclaim.success.pos2.price=^c:34EA80;Position 2 set successfully. Price: ^c:FFFFFF;{0-petals} ^c:34EA80;Petals
 mods.nimbusfox.landclaim.success.claim=^c:34EA80;You have successfully claimed this area
 mods.nimbusfox.landclaim.success.clear=^c:34EA80;Markers cleared
 mods.nimbusfox.landclaim.success.purge=^c:34EA80;Your claim has been cleared
@@ -35,8 +38,22 @@ mods.nimbusfox.landclaim.error.landtaken=^c:FF0000;You cannot put a claim inside
 mods.nimbusfox.landclaim.error.hasclaim=^c:FF0000;You already have a piece of land claimed. Please use the purge command before claiming another piece of land
 mods.nimbusfox.landclaim.error.nopos=^c:FF0000;Be sure to have placed down both of your markers before placing a claim
 mods.nimbusfox.landclaim.error.notinclaim=^c:FF0000;You are not currently in a claimed zone
+mods.nimbusfox.landclaim.error.invalidsetting=^c:FF0000;This is an invalid setting. Please use one of the following^c:FFFFFF; maxtiles, costpertile, chargeforclaiming
+mods.nimbusfox.landlcaim.error.notenoughpetals=^c:FF0000;You do not have the needed petals to make this claim
+mods.nimbusfox.landclaim.error.toomanytiles=^c:FF0000;The selected area is more than the server's limit. Max Tiles: {0-maxtiles}
 
-mods.nimbusfox.landclaim.message.details.1=^c:F2E200;Owner:^c:FFFFFF;{0-player}
-mods.nimbusfox.landclaim.message.details.2=^c:F2E200;Size:^c:FFFFFF;{0-tilecount} tiles
-mods.nimbusfox.landclaim.message.details.3.adminzone=^c:F2E200;Type:^c:FFFFFF;Admin
-mods.nimbusfox.landclaim.message.details.3.userzone=^c:F2E200;Type:^c:FFFFFF;User
+mods.nimbusfox.landclaim.message.details.1=^c:F2E200;Owner: ^c:FFFFFF;{0-player}
+mods.nimbusfox.landclaim.message.details.2=^c:F2E200;Size: ^c:FFFFFF;{0-tilecount} tiles
+mods.nimbusfox.landclaim.message.details.3.adminzone=^c:F2E200;Type: ^c:FFFFFF;Admin
+mods.nimbusfox.landclaim.message.details.3.userzone=^c:F2E200;Type: ^c:FFFFFF;User
+
+mods.nimbusfox.landclaim.message.settings.1=^c:F2E200;Charge for Claiming: ^c:FFFFFF; {0-truefalse}
+mods.nimbusfox.landclaim.message.settings.1.update=^c:F2E200;Charge for Claiming: {0-truefalse}
+mods.nimbusfox.landclaim.message.settings.2=^c:F2E200;Max Tiles: ^c:FFFFFF; {0-maxtiles}
+mods.nimbusfox.landclaim.message.settings.2.update=^c:F2E200;Max Tiles: {0-maxtiles}
+mods.nimbusfox.landclaim.message.settings.3=^c:F2E200;Cost Per Tile: ^c:FFFFFF; {0-petals} ^c:F2E200;Petals
+mods.nimbusfox.landclaim.message.settings.3.update=^c:F2E200;Cost Per Tile: {0-petals} ^c:F2E200;Petals
+
+mods.nimbusfox.landclaim.message.settings.maxtiles=Max Tiles. Value: Number
+mods.nimbusfox.landclaim.message.settings.costpertile=Cost per tile. Value: Number
+mods.nimbusfox.landclaim.message.settings.chargeforclaiming=Charge for claiming. Value: true/false
